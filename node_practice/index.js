@@ -1,3 +1,4 @@
+console.log('Buh Moment')
 const express = require('express')
 const app = express()
 const requestLogger = (request, response, next) => {
