@@ -24,6 +24,6 @@ dist-ssr
 README.md
 .eslintrc.cjs
 vite.config.js
-index.html
+/index.html
 public/vite.svg
 src/assets/react.svg
