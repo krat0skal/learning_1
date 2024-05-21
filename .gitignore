@@ -27,3 +27,4 @@ vite.config.js
 /index.html
 public/vite.svg
 src/assets/react.svg
+.env

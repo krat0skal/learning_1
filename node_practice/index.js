@@ -1,4 +1,29 @@
-console.log('Buh Moment')
+require('dotenv').config()
+const mongoose = require('mongoose')
+
+const password = '4hWuk0wj8CZCPgfT'
+
+// DO NOT SAVE YOUR PASSWORD TO GITHUB!!
+const url =
+  `mongodb+srv://pandeyh38:${password}@clusnoter0.efznds8.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
+
+mongoose.set('strictQuery',false)
+mongoose.connect(url)
+
+const noteSchema = new mongoose.Schema({
+  content: String,
+  important: Boolean,
+})
+
+noteSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
+const Note = require('./models/note')
 const express = require('express')
 const app = express()
 const requestLogger = (request, response, next) => {
@@ -40,7 +65,9 @@ app.get('/', (request, response) => {
 })
 
 app.get('/api/notes', (request, response) => {
+  Note.find({}).then(notes => {
     response.json(notes)
+  })
 })
 
 app.get('/api/notes/:id', (request, response) => {
