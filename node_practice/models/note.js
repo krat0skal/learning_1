@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 mongoose.set('strictQuery', false)
 
 
-const url = process.env.MONGODB_URI
+const url = `mongodb+srv://pandeyh38:t25HJRWuuMnYP7BN@clusnoter0.efznds8.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 
 console.log('connecting to', url)
@@ -18,8 +18,13 @@ mongoose.connect(url)
   })
 
 const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean,
+
+  content: {
+    type: String,
+    minLength: 5,
+    required: true
+  },
+  important: Boolean
 })
 
 noteSchema.set('toJSON', {
